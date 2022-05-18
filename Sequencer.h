@@ -1,6 +1,7 @@
 #pragma once
 #include "pico/stdlib.h"
-
+#include <hardware/i2c.h>
+#include "LCD1602.h"
 class Sequencer
 {
 public:
@@ -21,4 +22,11 @@ private:
 
   const uint LED_PIN = 25;
   bool light;
+  i2c_inst_t *i2c;
+  LCD1602 lcd;
+
+  static const size_t MAX_DIGITS = 50;
+  char digits[50];
+  
+  void updateDigits(uint64_t timestamp);
 };
